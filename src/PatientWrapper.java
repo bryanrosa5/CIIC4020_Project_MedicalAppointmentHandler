@@ -80,7 +80,7 @@ public class PatientWrapper {
         public String getVitals(){
             String pressure = this.bloodPressure == null ? "Not recorded" : bloodPressure;
 
-            String temperature = this.bodyTemperature == 0 ? "Not recorded" : bodyTemperature + " °F";
+            String temperature = this.bodyTemperature == 0.0 ? "Not recorded" : bodyTemperature + " °F";
 
             return "Blood Pressure: " + pressure
                     + "\nBody Temperature: " + temperature;
@@ -126,6 +126,7 @@ public class PatientWrapper {
             return this.bodyTemperature;
         }
 
+        @Override
         public String toString(){
             return "Date: " + this.getVisitDate() +
             "\nReason for Visit: " + this.getReasonForVisit() +
@@ -144,6 +145,15 @@ public class PatientWrapper {
         private char sex;
         private Deque<MedicalRecord> medicalHistory;
         private MedicalRecord currentRecord;
+
+        public Patient(long id, String name, LocalDate dateOfBirth, char sex){
+            this.id = id;
+            this.name = name;
+            this.dateOfBirth = dateOfBirth;
+            this.sex = sex;
+            this.medicalHistory = new ArrayDeque<>();
+            this.currentRecord = new MedicalRecord();
+        }
 
         public long getID(){
             return this.id;
@@ -177,6 +187,7 @@ public class PatientWrapper {
             return this.medicalHistory.peek();
         }
 
+        @Override
         public String toString(){
             return "Patient ID: " + this.getID() +
             "\nPatient Name: " + this.getName() +
