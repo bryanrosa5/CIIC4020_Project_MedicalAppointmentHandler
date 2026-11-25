@@ -1,31 +1,68 @@
 import java.util.Queue;
 import java.util.LinkedList;
 
-public class Medico extends Empleado {
-    private String especialidad;
-    private boolean disponible;
-
-    public Medico(int id, String nombre, String especialidad) {
-        super(id, nombre);
-        this.especialidad = especialidad;
-        this.disponible = true;
+public class Medic extends Employee {
+    
+    public enum Specialty {
+        GeneralOphthalmology,
+        PediatricOphthalmology,
+        NeuroOphthalmology,
+        Retinology
     }
 
-    public void setDisponible(boolean disponible) {
-        this.disponible = disponible;
+    private boolean available;
+    private Specialty specialty;
+
+    public Medic(int id, String name, Specialty specialty) {
+        super(id, name);
+        this.specialty = specialty;
+        this.available = true;
     }
 
-    public boolean getDisponible() {
-        return disponible;
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+    public boolean getAvailable() {
+        return available;
     }
 
-    public String getEspecialidad() {
-        return especialidad;
+    public Specialty getSpecialty() {
+        return specialty;
     }
 
-    Queue<Paciente> colaPacientes = new LinkedList<>();
+    private Queue<PatientWrapper.Patient> patientQueue = new LinkedList<>();
 
-    public void agregarPaciente(Paciente paciente) {
-        colaPacientes.offer(paciente);
+    public Queue<PatientWrapper.Patient> getWaitingPatients(){
+    return patientQueue;
+    }
+
+    public void addPatient(PatientWrapper.Patient patient) {
+        patientQueue.offer(patient);
+    }
+
+    public PatientWrapper.Patient attendPatient(){
+
+    if(!patientQueue.isEmpty() && available){
+        available = false;
+        return patientQueue.poll();
+    }
+    else return null;
+    }
+
+    public void recordDiagnosis(PatientWrapper.Patient patient, String diagnosis){
+        patient.getCurrentRecord().setDiagnosis(diagnosis);
+    }
+
+    public void recordTreatmentPlan(PatientWrapper.Patient patient, String treatmentPlan){
+        patient.getCurrentRecord().setTreatmentPlan(treatmentPlan);
+    }
+
+    public void recordNotes(PatientWrapper.Patient patient, String notes){
+        patient.getCurrentRecord().setNotes(notes);
+    }
+
+    public  void finishConsultation(PatientWrapper.Patient patient, Secretary secretary){
+        secretary.addPatient(patient);
+        available = true;
     }
 }
