@@ -26,9 +26,9 @@ public class AppointmentsManager {
  
         for (Appointments a : appointmentsById.values()) {
             if (a.getStatus() == Appointments.Status.SCHEDULED
-                    && a.getDoctorId().equals(doctorId)
+                    && (a.getDoctorId().equals(doctorId) || a.getPatientId() == patientId)
                     && a.getDateTime().equals(when)) {
-                throw new AppointmentsException("Doctor " + doctorId + " is already booked at " + when.format(Appointments.FORMAT));
+                throw new AppointmentsException("Doctor or patient is already booked at " + when.format(Appointments.FORMAT));
             }
         }
  

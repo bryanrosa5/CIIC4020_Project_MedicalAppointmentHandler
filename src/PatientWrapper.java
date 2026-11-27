@@ -180,7 +180,8 @@ public class PatientWrapper {
         }
 
         public void saveCurrentRecord(){
-            this.medicalHistory.add(this.currentRecord);
+            this.medicalHistory.push(this.currentRecord);
+            this.currentRecord = new MedicalRecord();
         }
 
         public MedicalRecord getPreviousRecord(){
