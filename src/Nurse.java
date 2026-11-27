@@ -22,7 +22,15 @@ public class Nurse extends Employee {
     return patientQueue;
     }
 
-    public void addPatient(PatientWrapper.Patient patient) {
+    public void addPatient(PatientWrapper.Patient patient){
+        if(patient == null){
+            return;
+        }
+        for(PatientWrapper.Patient waitingPatient : patientQueue){
+            if(waitingPatient.getID() == patient.getID()){
+                return;
+            }
+        }
         patientQueue.offer(patient);
     }
 

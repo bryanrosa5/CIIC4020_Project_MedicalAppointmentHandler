@@ -36,12 +36,20 @@ public class Medic extends Employee {
     return patientQueue;
     }
 
-    public void addPatient(PatientWrapper.Patient patient) {
+    public void addPatient(PatientWrapper.Patient patient){
+        if(patient == null){
+            return;
+        }
+
+        for(PatientWrapper.Patient waitingPatient : patientQueue){
+            if(waitingPatient.getID() == patient.getID()){
+                return;
+            }
+        }
         patientQueue.offer(patient);
     }
 
     public PatientWrapper.Patient attendPatient(){
-
     if(!patientQueue.isEmpty() && available){
         available = false;
         return patientQueue.poll();

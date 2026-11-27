@@ -1,5 +1,6 @@
 import java.util.LinkedList;
 import java.util.Queue;
+import java.time.LocalDate;
 
 public class Secretary extends Employee {
     private boolean available;
@@ -22,7 +23,16 @@ public class Secretary extends Employee {
     return patientQueue;
     }
 
-    public void addPatient(PatientWrapper.Patient patient) {
+    public void addPatient(PatientWrapper.Patient patient){
+        if(patient == null){
+            return;
+        }
+
+        for(PatientWrapper.Patient waitingPatient : patientQueue){
+            if(waitingPatient.getID() == patient.getID()){
+                return;
+            }
+        }
         patientQueue.offer(patient);
     }
 
@@ -40,7 +50,8 @@ public class Secretary extends Employee {
         available = true;
     }
 
-    public void finishVisit(PatientWrapper.Patient patient) {
+    public void finishVisit(PatientWrapper.Patient patient){
+        patient.getCurrentRecord().setVisitDate(LocalDate.now());
         patient.saveCurrentRecord();
         available = true;
     }
