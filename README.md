@@ -31,12 +31,10 @@ The project implements data structures such as HashMaps, Queues, Lists, and Dequ
 
 1. Clone the repository:
 
-bash
 git clone https://github.com/bryanrosa5/CIIC4020_Project_MedicalAppointmentHandler.git
 
 2. Navigate to the project directory:
 
-bash
 cd CIIC4020_Project_MedicalAppointmentHandler
 
 <img width="824" height="91" alt="image" src="https://github.com/user-attachments/assets/a2a13856-467f-4ab2-8101-17589d3dc00c" />
@@ -44,7 +42,6 @@ cd CIIC4020_Project_MedicalAppointmentHandler
 
 3. Compile the Java files:
 
-bash
 javac -d out src/*.java
 
 <img width="713" height="86" alt="image" src="https://github.com/user-attachments/assets/dc6c6d33-0c41-4df4-9d07-6386ee90152d" />
@@ -52,7 +49,6 @@ javac -d out src/*.java
 
 4. Run the application:
 
-bash
 java -cp out Main
 
 <img width="626" height="112" alt="image" src="https://github.com/user-attachments/assets/6f1f62ef-7b05-4e20-a4c7-db7351ccd438" />
